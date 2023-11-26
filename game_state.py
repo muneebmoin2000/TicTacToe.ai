@@ -1,4 +1,4 @@
-from numpy import ndarray
+from numpy import array, random
 
 class Board():
     """Board class made to store the current game state of the tictactoe board; 
@@ -7,12 +7,16 @@ class Board():
     def __init__(self):
         """The constructor will initialize the board with empty values
         The entire game state of the board is being stored as a python list."""
-        self.board = ([
-            ["","",""],
-            ["","",""],
-            ["","",""]
-        ])
         
+        self.players = ["X","O"]
+        self.curr_player = random(self.players)
+
+        self.board = array([
+            [" "," "," "],
+            [" "," "," "],
+            [" "," "," "]
+        ])
+
     def visualize_board(self,boards):
         """This function is useful for displaying the game onto the console for now;
         In future implementations, this console centric display will be replaced with a GUI"""
@@ -27,3 +31,4 @@ class Board():
 
 b = Board()
 b.visualize_board(b.board)
+print()
