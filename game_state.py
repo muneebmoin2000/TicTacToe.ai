@@ -19,6 +19,18 @@ class Board():
         self.end_states = ["X Wins", "O Wins", "Tied Game","Please Continue Game","Please Start the Game"]
         self.used_spots = 0
 
+    def visualize(self,boards):
+        """This function is useful for displaying the game onto the console for now;
+        In future implementations, this console centric display will be replaced with a GUI"""
+
+        print()
+        print(f" {boards[0][0]} | {boards[0][1]} | {boards[0][2]} ")
+        print("---+---+---")
+        print(f" {boards[1][0]} | {boards[1][1]} | {boards[1][2]} ")
+        print("---+---+---")
+        print(f" {boards[2][0]} | {boards[2][1]} | {boards[2][2]} ")
+        print()
+
     def check_winner(self):
         """If there are spots still available,
          winner could still be determined based on the moves """
@@ -38,28 +50,16 @@ class Board():
         
         return self.winner
         
-    def ending_state(self):
-        #check the final end-state of the game and return it
-        #Its possible that the game never started in which is also an edge case
+    def curr_state(self):
+        """check the final end-state of the game and return it
+        Its possible that the game never started in which is also an edge case"""
         if self.used_spots == 0:
             return self.end_states[4]
-        if self.check_winner() is None and self.used_spots < 9:
+        if self.winner is None and self.used_spots < 9:
             return self.end_states[3]
-        if self.check_winner() is None and self.used_spots == 9:
+        if self.winner is None and self.used_spots == 9:
             return self.end_states[2]
-        if self.check_winner() == self.players[1]:
+        if self.winner == self.players[1]:
             return self.end_states[1]
-        if self.check_winner() == self.players[0]:
+        if self.winner == self.players[0]:
             return self.end_states[0]
-
-    def visualize(self,boards):
-        """This function is useful for displaying the game onto the console for now;
-        In future implementations, this console centric display will be replaced with a GUI"""
-
-        print()
-        print(f" {boards[0][0]} | {boards[0][1]} | {boards[0][2]} ")
-        print("---+---+---")
-        print(f" {boards[1][0]} | {boards[1][1]} | {boards[1][2]} ")
-        print("---+---+---")
-        print(f" {boards[2][0]} | {boards[2][1]} | {boards[2][2]} ")
-        print()
