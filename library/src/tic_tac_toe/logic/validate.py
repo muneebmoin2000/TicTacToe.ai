@@ -4,6 +4,7 @@ import re
 from tic_tac_toe.logic.exceptions import InvalidGameState
 
 if TYPE_CHECKING:
+    from tic_tac_toe.game.players import Player
     from tic_tac_toe.logic.models import Board, GameState, Mark
 
 
@@ -52,3 +53,9 @@ def validate_winner(board: Board, starting_mark: Mark, winner: Mark | None) -> N
         else:
             if board.circle_count != board.cross_count:
                 raise InvalidGameState("Incorrect number of circles")
+
+
+def validate_players(player1: Player, player2: Player) -> None:
+    if player1.mark is player2.mark:
+        raise ValueError(
+            "Players need to use different marks; currently they have chosen the same marks")
